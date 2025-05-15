@@ -85,9 +85,6 @@ rostopic echo /angle_data
 Ensure the following dependencies are installed:
 
 - ROS Noetic
-- `libmodbus-dev` (for Modbus RTU communication)
-- Standard ROS packages (`rospy`, `std_msgs`, etc.)
-- Python 3
 - Official Inspire Hand Modbus driver
 
 ---
