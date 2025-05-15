@@ -1,0 +1,24 @@
+<launch>
+    <!-- set mode, default is 0 -->
+    <arg name="mode" default="0" />
+
+    <!-- start hand_modbus_control node -->
+    <node pkg="inspire_hand_modbus" type="hand_modbus_control" name="hand_modbus_control" output="screen" />
+
+    <!-- if mode == 1, start hand_control_client_modbus node -->
+    <group if="$(eval arg('mode') == 1)">
+        <node pkg="inspire_hand_modbus" type="hand_control_client_modbus" name="hand_control_client_modbus" output="screen" />
+    </group>
+
+    <!-- if mode == 2, start handcontrol_publisher and handcontrol_subscriber -->
+    <group if="$(eval arg('mode') == 2)">
+        <node name="handcontrol_publisher" pkg="inspire_hand_modbus" type="handcontrol_topic_publisher_modbus.py" output="screen"/>
+        <node name="handcontrol_subscriber" pkg="inspire_hand_modbus" type="handcontrol_topic_subscriber_modbus.py" output="screen"/>
+    </group>
+
+    <!-- if mode == 3, start inspire_hand_modbus_topic.py -->
+    <group if="$(eval arg('mode') == 3)">
+        <node name="inspire_hand_modbus_topic" pkg="inspire_hand_modbus" type="inspire_hand_modbus_topic.py" output="screen"/>
+    </group>
+</launch>
+

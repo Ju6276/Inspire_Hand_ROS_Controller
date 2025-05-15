@@ -1,0 +1,6 @@
+# Request
+int16 id
+---
+# Response
+bool idgrab
+bool success

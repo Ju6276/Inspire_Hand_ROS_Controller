@@ -1,20 +1,20 @@
 # Inspire Dexterous Hand Controller - ROS Noetic
 
-This package provides a ROS Noetic-compatible interface for controlling the **Inspire Dexterous Hand**, built on top of the official `inspire_hand` package. Unlike the original service-based approach, this version uses **ROS topics** for all control and feedback, enabling non-blocking, high-frequency communication and real-time responsiveness. The frequency of reading from and controlling the registers is considered.
+This package provides a ROS Noetic-compatible interface for controlling the **Inspire Dexterous Hand**, built on top of the official `inspire_hand_modbus` package . This version uses **ROS topics** for all control and feedback, enabling non-blocking, high-frequency communication and real-time responsiveness. The frequency of reading from and controlling the registers is considered.
 
 ---
 
-## ✨ Features
+## Features
 
-- 🛠️ Full control of the Inspire hand via ROS topics (angle, speed, and force)
-- 📡 Real-time feedback including tactile sensors, joint angles, and force/current values
-- ⚡ High-speed reading frequency and control frequency.
-- 🔄 Multiple launch modes for flexible deployment
-- ✅ Compatible with ROS Noetic & Ubuntu 20.04
+- Full control of the Inspire hand via ROS topics (angle, speed, and force)
+- Real-time feedback including tactile sensors, joint angles, and force/current values
+- High-speed reading frequency and control frequency.
+- Multiple launch modes for flexible deployment
+- Compatible with ROS Noetic & Ubuntu 20.04
 
 ---
 
-## 🚀 Launch Modes
+## Launch Modes
 
 Use the following launch modes to start the system:
 
@@ -31,9 +31,9 @@ roslaunch inspire_hand_modbus control.launch mode:=<mode_id>
 
 ---
 
-## 🛰️ Topic Interface
+## Topic Interface
 
-### ✅ Control Topics
+### Control Topics
 
 | Topic Name        | Message Type                      | Description                           |
 |------------------|-----------------------------------|---------------------------------------|
@@ -41,19 +41,19 @@ roslaunch inspire_hand_modbus control.launch mode:=<mode_id>
 | `/set_speed_data`| `inspire_hand_modbus/set_speed_1` | Set joint movement speeds             |
 | `/set_force_data`| `inspire_hand_modbus/set_force_1` | Set joint force/current values        |
 
-#### 🔧 Example: Set Angles
+#### Example: Set Angles
 
 ```bash
 rostopic pub -1 /set_angle_data inspire_hand_modbus/set_angle_1 "{finger_ids: [1, 2, 3, 4, 5, 6], angles: [1000, 1000, 1000, 1000, 1000, 1000]}"
 ```
 
-#### 🔧 Example: Set Speed
+#### Example: Set Speed
 
 ```bash
 rostopic pub -1 /set_speed_data inspire_hand_modbus/set_speed_1 "{finger_ids: [1, 2, 3, 4, 5, 6], speeds: [1000, 1000, 1000, 1000, 1000, 1000]}"
 ```
 
-#### 🔧 Example: Set Force
+#### Example: Set Force
 
 ```bash
 rostopic pub -1 /set_force_data inspire_hand_modbus/set_force_1 "{finger_ids: [1, 2, 3, 4, 5, 6], forces: [1000, 1000, 1000, 1000, 1000, 1000]}"
@@ -61,7 +61,7 @@ rostopic pub -1 /set_force_data inspire_hand_modbus/set_force_1 "{finger_ids: [1
 
 ---
 
-### 📤 Feedback Topics
+### Feedback Topics
 
 | Topic Name     | Message Type              | Description                           |
 |----------------|---------------------------|---------------------------------------|
@@ -69,7 +69,7 @@ rostopic pub -1 /set_force_data inspire_hand_modbus/set_force_1 "{finger_ids: [1
 | `/force_data`  | `std_msgs/Int32MultiArray`| Measured joint force values           |
 | `/angle_data`  | `std_msgs/Int32MultiArray`| Current joint angles			|
 
-#### 📡 Example: 
+#### Example: 
 
 ```bash
 rostopic echo /touch_data
@@ -80,7 +80,7 @@ rostopic echo /angle_data
 ---
 
 
-## 🔧 Dependencies
+## Dependencies
 
 Ensure the following dependencies are installed:
 
@@ -88,14 +88,18 @@ Ensure the following dependencies are installed:
 - Official Inspire Hand Modbus driver
 
 ---
+## Acknowledgments
 
-## 📞 Contact
+Thanks to Inspire Robotics for their technical support during the development of this ROS package.
+---
+
+## Contact
 
 For questions, bug reports, or contributions, feel free to open an issue or contact the maintainer via GitHub.
 
 ---
 
-## 📜 License
+## License
 
 This project is distributed under the MIT License.
 
