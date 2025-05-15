@@ -88,9 +88,11 @@ Ensure the following dependencies are installed:
 - Official Inspire Hand Modbus driver
 
 ---
+
 ## Acknowledgments
 
 Thanks to Inspire Robotics for their technical support during the development of this ROS package.
+
 ---
 
 ## Contact
