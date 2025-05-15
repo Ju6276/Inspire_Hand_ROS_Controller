@@ -1,2 +1,2 @@
-# Inspire_Hand_Ros_Controller
+# Inspire_Hand_ROS_Controller
 Inspire Dexterous Hand Controller - Noetic
