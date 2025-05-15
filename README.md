@@ -1,6 +1,6 @@
 # Inspire Dexterous Hand Controller - ROS Noetic
 
-This package provides a ROS Noetic-compatible interface for controlling the **Inspire Dexterous Hand**, built on top of the official `inspire_hand` package. Unlike the original service-based approach, this version uses **ROS topics** for all control and feedback, enabling non-blocking, high-frequency communication and real-time responsiveness.
+This package provides a ROS Noetic-compatible interface for controlling the **Inspire Dexterous Hand**, built on top of the official `inspire_hand` package. Unlike the original service-based approach, this version uses **ROS topics** for all control and feedback, enabling non-blocking, high-frequency communication and real-time responsiveness. The frequency of reading from and controlling the registers is considered.
 
 ---
 
@@ -8,7 +8,7 @@ This package provides a ROS Noetic-compatible interface for controlling the **In
 
 - 🛠️ Full control of the Inspire hand via ROS topics (angle, speed, and force)
 - 📡 Real-time feedback including tactile sensors, joint angles, and force/current values
-- ⚡ More efficient than service-based architecture
+- ⚡ High-speed reading frequency and control frequency.
 - 🔄 Multiple launch modes for flexible deployment
 - ✅ Compatible with ROS Noetic & Ubuntu 20.04
 
@@ -33,7 +33,7 @@ roslaunch inspire_hand_modbus control.launch mode:=<mode_id>
 
 ## 🛰️ Topic Interface
 
-### ✅ Control Topics (Subscribers)
+### ✅ Control Topics
 
 | Topic Name        | Message Type                      | Description                           |
 |------------------|-----------------------------------|---------------------------------------|
@@ -61,15 +61,15 @@ rostopic pub -1 /set_force_data inspire_hand_modbus/set_force_1 "{finger_ids: [1
 
 ---
 
-### 📤 Feedback Topics (Publishers)
+### 📤 Feedback Topics
 
-| Topic Name      | Message Type              | Description                           |
+| Topic Name     | Message Type              | Description                           |
 |----------------|---------------------------|---------------------------------------|
 | `/touch_data`  | `std_msgs/Int32MultiArray`| Binary tactile data from each finger  |
 | `/force_data`  | `std_msgs/Int32MultiArray`| Measured joint force values           |
-| `/angle_data`  | `std_msgs/Int32MultiArray`| Current joint angles (encoder values) |
+| `/angle_data`  | `std_msgs/Int32MultiArray`| Current joint angles			|
 
-#### 📡 Example: View Feedback
+#### 📡 Example: 
 
 ```bash
 rostopic echo /touch_data
@@ -79,51 +79,6 @@ rostopic echo /angle_data
 
 ---
 
-## 🧾 Custom Message Definitions
-
-### `set_angle_1.msg`
-
-```msg
-int32[] finger_ids  
-int32[] angles
-```
-
-### `set_speed_1.msg`
-
-```msg
-int32[] finger_ids  
-int32[] speeds
-```
-
-### `set_force_1.msg`
-
-```msg
-int32[] finger_ids  
-int32[] forces
-```
-
----
-
-## 📂 Directory Structure
-
-```
-inspire_hand_modbus/
-├── launch/
-│   └── control.launch
-├── msg/
-│   ├── set_angle_1.msg
-│   ├── set_speed_1.msg
-│   └── set_force_1.msg
-├── scripts/
-│   └── inspire_hand_modbus_topic.py
-├── src/
-│   ├── hand_modbus_control.cpp
-│   └── hand_control_client_modbus.cpp
-├── CMakeLists.txt
-└── package.xml
-```
-
----
 
 ## 🔧 Dependencies
 
@@ -146,3 +101,5 @@ For questions, bug reports, or contributions, feel free to open an issue or cont
 ## 📜 License
 
 This project is distributed under the MIT License.
+
+
